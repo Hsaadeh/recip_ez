@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'profiles',
     'list_manager',
     'recipe_manager',
+    'tailwind',
+    'theme'
 ]
 
 AUTH_USER_MODEL = "profiles.CustomUser"
@@ -134,3 +136,8 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ]
 }
+
+TAILWIND_APP_NAME = 'theme'
+TAILWIND_CSS_PATH = 'css/dist/styles.css'
+
+NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'

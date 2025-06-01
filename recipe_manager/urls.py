@@ -2,9 +2,12 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from .api import RecipeViewSet
+from . import views
 
 
 view_urls = [
+    path("recipes/", views.view_recipes, name="view_recipes"),
+    path("add-recipe/", views.view_add_recipe, name="view_add_recipe"),
 ]
 
 api_urls = [
