@@ -1,5 +1,5 @@
 from django.db import models
-# from moneyfield import MoneyField
+from djmoney.models.fields import MoneyField
 
 
 class Recipe(models.Model):
@@ -32,10 +32,12 @@ class Ingredient(models.Model):
     unit = models.CharField(
         max_length=50,
     )
-    # unit_cost = MoneyField(
-    #     decimal_places=2,
-    #     max_digits=8
-    # )
+    unit_cost = MoneyField(
+        default=0.00,
+        max_digits=14, 
+        decimal_places=2, 
+        default_currency='USD'
+    )
 
     def __str__(self):
         return self.name
