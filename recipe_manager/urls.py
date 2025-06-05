@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from .api import RecipeViewSet
+from .api import RecipeViewSet, IngredientViewSet
 from . import views
 
 
@@ -16,5 +16,6 @@ api_urls = [
 router = DefaultRouter()
 
 router.register(r"api/v1/recipes", RecipeViewSet, basename="recipes")
+router.register(r"api/v1/ingredients", IngredientViewSet, basename="ingredients")
 
 urlpatterns = view_urls + api_urls + router.urls

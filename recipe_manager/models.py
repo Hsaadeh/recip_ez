@@ -1,13 +1,28 @@
 from django.db import models
 from djmoney.models.fields import MoneyField
+from profiles.models import CustomUser
 
 
 class Recipe(models.Model):
     id = models.AutoField(
         primary_key=True,
     )
+    owner = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
     name = models.CharField(
         max_length=125,
+    )
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+    directions = models.TextField(
+        blank=True,
+        null=True
     )
 
     def __str__(self):
