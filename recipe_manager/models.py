@@ -3,6 +3,7 @@ from djmoney.models.fields import MoneyField
 from profiles.models import CustomUser
 
 
+
 class Recipe(models.Model):
     id = models.AutoField(
         primary_key=True,
@@ -35,7 +36,15 @@ class Ingredient(models.Model):
     )
     recipe = models.ForeignKey(
         Recipe,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+    shopping_list = models.ForeignKey(
+        "list_manager.ShoppingList",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
     name = models.CharField(
         max_length=125,
