@@ -7,6 +7,7 @@ from . import views
 
 view_urls = [
     path("recipes/", views.view_recipes, name="view_recipes"),
+    path("recipe/<str:id>", views.view_recipe, name="view_recipe"),
     path("add-recipe/", views.view_add_recipe, name="view_add_recipe"),
 ]
 

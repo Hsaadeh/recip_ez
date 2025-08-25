@@ -3,6 +3,13 @@ from djmoney.models.fields import MoneyField
 from profiles.models import CustomUser
 
 
+RECIPE_TYPE_CHOICES = (
+    ("Breakfast", "Breakfast"),
+    ("Lunch", "Lunch"),
+    ("Dinner", "Dinner"),
+    ("Snack", "Snack"),
+)
+
 
 class Recipe(models.Model):
     id = models.AutoField(
@@ -24,6 +31,11 @@ class Recipe(models.Model):
     directions = models.TextField(
         blank=True,
         null=True
+    )
+    recipe_type = models.CharField(
+        choices=RECIPE_TYPE_CHOICES,
+        blank=True,
+        null=True,
     )
 
     def __str__(self):
