@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block css %}
+
+{% endblock css %}
+
+
+
+{% block content %}
+    <h1>
+        {{ shopping_list.name }}
+    </h1>
+
+    <h1>INGREDIENTS</h1>
+    <ul>
+        {% for ingredient in shopping_list_ingredients %}
+            <li>{{ ingredient.name }} : recipe={{ ingredient.recipe }} : list={{ ingredient.shopping_list }}</li>
+        {% endfor %}
+    </ul>
+
+    {% comment %} <h1>RECIPES</h1>
+    <ul>
+        {% for recipe in recipes %}
+            <li>{{ recipe.name }}</li>
+        {% endfor %}
+    </ul> {% endcomment %}
+
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}
