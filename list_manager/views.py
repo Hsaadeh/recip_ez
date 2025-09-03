@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import ShoppingList
 from recipe_manager.models import Recipe, Ingredient
+from app.settings import NOT_FOUND_VIEW
 
 
 
@@ -19,17 +20,12 @@ def view_shopping_lists(request):
 
 
 def view_shopping_list(request, id):
-    combined_ingredients = []
-
     try:
         shopping_list = ShoppingList.objects.get(id=id)
-    except:
-        shopping_list = None
+    except ShoppingList.DoesNotExist:
+        return redirect(NOT_FOUND_VIEW)
     
-    try:
-        shopping_list_ingredients = Ingredient.objects.filter(shopping_list=shopping_list)
-    except:
-        shopping_list_ingredients = None
+    shopping_list_ingredients = Ingredient.objects.filter(shopping_list=shopping_list)
 
     for recipe in shopping_list.recipes.all():
         try:
@@ -39,8 +35,6 @@ def view_shopping_list(request, id):
         
         if recipe_ingredients != None:
             shopping_list_ingredients |= recipe_ingredients
-    
-    print(shopping_list_ingredients)
     
     context = {
         "page_title": "Shopping List",

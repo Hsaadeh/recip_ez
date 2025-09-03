@@ -142,3 +142,6 @@ TAILWIND_APP_NAME = 'theme'
 TAILWIND_CSS_PATH = 'css/dist/styles.css'
 
 NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
+
+DEFAULT_VIEW = "view_recipes"
+NOT_FOUND_VIEW = "view_not_found"
