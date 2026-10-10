@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from recipe_manager.models import Recipe, Ingredient
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="/sign-in")
 def view_recipes(request):
     recipe_data = []
 
@@ -32,6 +34,7 @@ def view_recipes(request):
     return render(request, "recipes.html", context)
 
 
+@login_required(login_url="/sign-in")
 def view_recipe(request, id):
     try:
         recipe = Recipe.objects.get(id=id)
@@ -52,6 +55,7 @@ def view_recipe(request, id):
     return render(request, "recipe.html", context)
 
 
+@login_required(login_url="/sign-in")
 def view_add_recipe(request):
     try:
         recipes = Recipe.objects.all()

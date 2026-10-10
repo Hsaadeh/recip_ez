@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect
 from .models import ShoppingList
 from recipe_manager.models import Recipe, Ingredient
 from app.settings import NOT_FOUND_VIEW
+from django.contrib.auth.decorators import login_required
 
 
 
+
+@login_required(login_url="/sign-in")
 def view_shopping_lists(request):
     try:
         shopping_lists = ShoppingList.objects.all()
@@ -19,7 +22,10 @@ def view_shopping_lists(request):
     return render(request, "shopping_lists.html", context)
 
 
+@login_required(login_url="/sign-in")
 def view_shopping_list(request, id):
+    """Displays the shopping list and its combined ingredients"""
+    
     try:
         shopping_list = ShoppingList.objects.get(id=id)
     except ShoppingList.DoesNotExist:
