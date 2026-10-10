@@ -50,3 +50,12 @@ def view_shopping_list(request, id):
     }
 
     return render(request, "shopping_list.html", context)
+
+
+@login_required(login_url="/sign-in")
+def view_add_shopping_list(request):
+    """Displays the add shopping list form"""
+    context = {
+        "page_title": "Add A Shopping List",
+    }
+    return render(request, "add_shopping_list.html", context)
