@@ -8,8 +8,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-indigo-500: oklch(58.5% 0.233 277.117);
-    --color-indigo-600: oklch(51.1% 0.262 276.966);
-    --color-indigo-700: oklch(45.7% 0.24 277.023);
     --color-gray-50: oklch(98.5% 0.002 247.839);
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-300: oklch(87.2% 0.01 258.338);
@@ -267,9 +265,6 @@
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
-  .ml-2 {
-    margin-left: calc(var(--spacing) * 2);
-  }
   .block {
     display: block;
   }
@@ -390,9 +385,6 @@
   .overflow-auto {
     overflow: auto;
   }
-  .rounded {
-    border-radius: 0.25rem;
-  }
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
@@ -443,9 +435,6 @@
   }
   .bg-gray-900 {
     background-color: var(--color-gray-900);
-  }
-  .bg-indigo-600 {
-    background-color: var(--color-indigo-600);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -548,9 +537,6 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
-  .text-indigo-600 {
-    color: var(--color-indigo-600);
-  }
   .text-white {
     color: var(--color-white);
   }
@@ -590,18 +576,8 @@
     }
   }
   @media (hover: hover) {
-    .hover\:bg-indigo-700:hover {
-      background-color: var(--color-indigo-700);
-    }
-  }
-  @media (hover: hover) {
     .hover\:text-gray-700:hover {
       color: var(--color-gray-700);
-    }
-  }
-  @media (hover: hover) {
-    .hover\:text-indigo-500:hover {
-      color: var(--color-indigo-500);
     }
   }
   .focus\:border-indigo-500:focus {

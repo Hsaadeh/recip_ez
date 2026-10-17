@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('profiles.urls')),
     path('', include('list_manager.urls')),
     path('', include('recipe_manager.urls')),
+    path('', include('assistant.urls')),
 ]
