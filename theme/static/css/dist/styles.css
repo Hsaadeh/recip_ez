@@ -386,6 +386,9 @@
   .min-h-screen {
     min-height: 100vh;
   }
+  .w-9\/12 {
+    width: calc(9/12 * 100%);
+  }
   .w-11\/12 {
     width: calc(11/12 * 100%);
   }
@@ -909,6 +912,16 @@
     .md\:text-4xl {
       font-size: var(--text-4xl);
       line-height: var(--tw-leading, var(--text-4xl--line-height));
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:h-9\/12 {
+      height: calc(9/12 * 100%);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:w-9\/12 {
+      width: calc(9/12 * 100%);
     }
   }
   @media (width >= 64rem) {
