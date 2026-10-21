@@ -22,8 +22,10 @@ def api_agent_prompt(request):
                 max_tokens=1000,
             )
             agent_message = agent(prompt=user_prompt).message
+            message_text = agent_message["content"][0]["text"]
+            print(f"\n\n{agent_message}\n\n")
             data = {
-                "message": json.dumps(agent_message)
+                "message": str(message_text)
             }
             return Response(data=data, status=status.HTTP_200_OK)
         else:

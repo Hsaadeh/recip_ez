@@ -1,7 +1,11 @@
 {% load static %}
 
 {% block css %}
-
+<style>
+    pre {
+        white-space: pre-wrap;
+    }
+</style>
 {% endblock css %}
 
 
@@ -57,27 +61,31 @@
             <div>
                 <label for="user_prompt">
                     <div class="relative mt-0.5 overflow-hidden rounded border border-gray-300 shadow-sm focus-within:ring focus-within:ring-blue-600">
-                        <textarea
-                            id="user_prompt"
-                            class="w-full resize-y border-none focus:ring-0 sm:text-sm"
-                            rows="4"
-                        ></textarea>
-
-                        <div class="flex items-center justify-end gap-2 p-1.5">
-                            <button
-                                type="button"
-                                class="rounded border border-transparent px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
-                                >
-                                Clear
-                            </button>
-
-                            <button
-                                type="button"
-                                class="rounded border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-900 shadow-sm transition-colors hover:bg-gray-100"
-                                >
-                                Enter
-                            </button>
-                        </div>
+                        <form id="assistant-form">
+                            <textarea
+                                id="user_prompt"
+                                class="w-full resize-y border-none focus:ring-0 sm:text-sm"
+                                rows="4"
+                                required
+                            ></textarea>
+    
+                            <div class="flex items-center justify-end gap-2 p-1.5">
+                                <button
+                                    id="clear-textarea-btn"
+                                    type="button"
+                                    class="rounded cursor-pointer border border-transparent px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:text-gray-900"
+                                    >
+                                    Clear
+                                </button>
+    
+                                <button
+                                    type="submit"
+                                    class="rounded border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-900 shadow-sm transition-colors hover:bg-gray-100"
+                                    >
+                                    Enter
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </label>
             </div>
@@ -90,5 +98,6 @@
 
 {% block js %}
     <script src="{% static "js-helpers/html-parse.js" %}"></script>
+    <script src="{% static "js-helpers/cookie-helper.js" %}"></script>
     <script src="{% static "agent-form.js" %}"></script>
 {% endblock js %}

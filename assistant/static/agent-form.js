@@ -1,19 +1,41 @@
 const modalEl = document.querySelector('dialog')
 const openButtonEl = document.querySelector('[data-modal-open]')
 const messageHistoryContainer = document.querySelector("#message-history-container")
-
-
-// modalEl.showModal()
+const form = document.querySelector("#assistant-form")
+const clearTextareaButton = document.querySelector("#clear-textarea-btn")
+const DEFAULT_ERROR_MESSAGE = "An error occured retrieving the response"
 
 openButtonEl.addEventListener('click', () => modalEl.showModal())
+
+form.addEventListener("submit", function(event){
+    event.preventDefault()
+    let user_prompt = document.querySelector("#user_prompt").value
+    const body = {
+        "prompt": user_prompt
+    }
+    updateMessageHistory(user_prompt, "You")
+    handleSubmitForm(body)
+    clearTextarea()
+})
+
+
+clearTextareaButton.addEventListener("click", function() {
+    clearTextarea()
+})
+
 
 document.querySelectorAll('[data-modal-close]').forEach((buttonEl) => {
     buttonEl.addEventListener('click', () => modalEl.close())
 })
 
 
+function clearTextarea() {
+    document.querySelector("#user_prompt").value = ""
+}
+
+
 /**
- * 
+ * Creates the message component that will either be rendered as the "user's" message or the "assistant's" response
  * @param {String} message 
  * @param {String} messenger ("You" or "Assistant")
  * @returns 
@@ -30,7 +52,7 @@ function createMessageComponent(message, messenger) {
     let messageComponent = parseHtmlFromString(`
     <div class="w-fit max-w-11/12 rounded-lg p-4 ${messageAdditionalStyle}">
         <span class="font-semibold">${messenger}</span>
-        <p>${message}</p>
+        <p><pre>${message}</pre></p>
     </div>`
     )
 
@@ -47,4 +69,39 @@ function updateMessageHistory(message, messenger) {
     let newMessage = createMessageComponent(message, messenger)
     messageHistoryContainer.append(newMessage)
     messageHistoryContainer.scrollTop = messageHistoryContainer.scrollHeight
+}
+
+
+/**
+ * Makes a request to the agent prompt endpoint, sending the user's prompt
+ * - on success it will 
+ * @param {JSON} body 
+ */
+function handleSubmitForm(body) {
+    const url = "/api/agent-prompt/"
+    const method = "POST"
+    const options = {
+        method: method,
+        headers: {
+            "X-CSRFToken": getCookie('csrftoken'),
+            "Content-Type": "application/json; charset=UTF-8,",
+        },
+        body: JSON.stringify(body),
+    }
+    const response = fetch(url, options)
+    .then(response => {
+        if (response.ok) {
+            return response.json()
+        } else {
+            alert(DEFAULT_ERROR_MESSAGE)
+        }
+    })
+    .then(data => {
+        let message = data["message"] ?? null
+        if (data != null) {
+            updateMessageHistory(message, "Assistant")
+        } else (
+            alert(DEFAULT_ERROR_MESSAGE)
+        )
+    })
 }
