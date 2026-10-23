@@ -77,7 +77,7 @@ function updateMessageHistory(message, messenger) {
  * - on success it will 
  * @param {JSON} body 
  */
-function handleSubmitForm(body) {
+async function handleSubmitForm(body) {
     const url = "/api/agent-prompt/"
     const method = "POST"
     const options = {
@@ -88,20 +88,17 @@ function handleSubmitForm(body) {
         },
         body: JSON.stringify(body),
     }
-    const response = fetch(url, options)
-    .then(response => {
-        if (response.ok) {
-            return response.json()
-        } else {
-            alert(DEFAULT_ERROR_MESSAGE)
+
+    let message = ""
+    const response = await fetch(url, options)
+    const stream_reader = response.body.getReader()
+
+    while (true) {
+        const {done, value} = await stream_reader.read()
+        message += new TextDecoder().decode(value)
+        if (done) {
+            break
         }
-    })
-    .then(data => {
-        let message = data["message"] ?? null
-        if (data != null) {
-            updateMessageHistory(message, "Assistant")
-        } else (
-            alert(DEFAULT_ERROR_MESSAGE)
-        )
-    })
+    }
+    updateMessageHistory(message, "Assistant")
 }

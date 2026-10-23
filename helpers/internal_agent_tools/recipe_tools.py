@@ -1,7 +1,9 @@
 from strands import tool
+from recipe_manager.models import Recipe
 
 
-
-@tool
+@tool(context=True)
 def get_recipes():
-    pass
+    """Gets all available recipes"""
+    recipes = list(Recipe.objects.all().values_list())
+    return recipes

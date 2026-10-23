@@ -841,8 +841,8 @@
     }
   }
   @media (width >= 64rem) {
-    .lg\:h-9\/12 {
-      height: calc(9/12 * 100%);
+    .lg\:h-10\/12 {
+      height: calc(10/12 * 100%);
     }
   }
   @media (width >= 64rem) {
