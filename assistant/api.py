@@ -1,15 +1,18 @@
 import json
 from rest_framework import status
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from helpers.strands_agents_helper import create_agent
-from django.http.response import StreamingHttpResponse
+from django.http.response import StreamingHttpResponse, JsonResponse
 
 
 async def api_agent_prompt(request):
     """Endpoint to prompt the agent"""
+    user = await request.auser()
+    if user.is_authenticated != True:
+        data = {
+            "message": "Unauthorized"
+        }
+        return JsonResponse(data=data, status=status.HTTP_401_UNAUTHORIZED)
+
     async def generate_stream_response(prompt):
         """Generates the asynchronous stream response for the agent"""
         agent_system_prompt = "You are a helpful agent. You assist users with managing recipes and shopping lists."
@@ -33,11 +36,11 @@ async def api_agent_prompt(request):
             return response
         else:
             data = {
-                "message": "Invalid request"
+                "message": "Bad request, message is empty"
             }
-            return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(data=data, status=status.HTTP_400_BAD_REQUEST)
     else:
         data = {
             "message": "This method is not allowed",
         }
-        return Response(data=data, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        return JsonResponse(data=data, status=status.HTTP_405_METHOD_NOT_ALLOWED)
