@@ -94,7 +94,11 @@
 		</div>
 	</body>
 
-	{% include "agent-widget.html" %}
+	{% if request.user.is_authenticated %}
+		{% include "agent-widget.html" %}
+	{% endif %}
+
+
 	{% block js %}
 	
 	{% endblock js %}

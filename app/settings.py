@@ -136,6 +136,9 @@ NPM_BIN_PATH = r'C:\Program Files\nodejs\npm.cmd'
 DEFAULT_VIEW = "view_recipes"
 NOT_FOUND_VIEW = "view_not_found"
 
+HTTP_PROTOCOL=os.getenv("HTTP_PROTOCOL")
+SITE_URL=os.getenv("SITE_URL")
+
 AWS_ACCESS_KEY_ID=os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY=os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_REGION=os.getenv("AWS_REGION")
