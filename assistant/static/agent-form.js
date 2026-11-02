@@ -1,21 +1,20 @@
-const modalEl = document.querySelector('dialog')
+const agentModal = document.querySelector('dialog')
 const openButtonEl = document.querySelector('[data-modal-open]')
 const messageHistoryContainer = document.querySelector("#message-history-container")
-const form = document.querySelector("#assistant-form")
 const clearTextareaButton = document.querySelector("#clear-textarea-btn")
 const DEFAULT_ERROR_MESSAGE = "An error occured retrieving the response"
 
 
-openButtonEl.addEventListener('click', () => modalEl.showModal())
+openButtonEl.addEventListener('click', () => agentModal.showModal())
 
-form.addEventListener("submit", function(event){
+document.querySelector("#assistant-form").addEventListener("submit", function(event){
     event.preventDefault()
     let user_prompt = document.querySelector("#user_prompt").value
     const body = {
         "prompt": user_prompt
     }
     updateMessageHistory(user_prompt, "You")
-    handleSubmitForm(body)
+    makeAgentPromptRequest(body)
     clearTextarea()
 })
 
@@ -26,7 +25,7 @@ clearTextareaButton.addEventListener("click", function() {
 
 
 document.querySelectorAll('[data-modal-close]').forEach((buttonEl) => {
-    buttonEl.addEventListener('click', () => modalEl.close())
+    buttonEl.addEventListener('click', () => agentModal.close())
 })
 
 
@@ -78,7 +77,7 @@ function updateMessageHistory(message, messenger) {
  * - on success it will 
  * @param {JSON} body 
  */
-async function handleSubmitForm(body) {
+async function makeAgentPromptRequest(body) {
     const url = "/api/agent-prompt/"
     const method = "POST"
     const options = {
