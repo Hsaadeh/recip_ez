@@ -87,9 +87,9 @@
 
 			{% comment %} CONTENT {% endcomment %}
 			<div class="overflow-auto w-full">
-				<div class="min-w-[250px]">
-					{% block content %}{% endblock content %}
-				</div>
+				{% comment %} <div class="min-w-[250px]">
+				</div> {% endcomment %}
+				{% block content %}{% endblock content %}
 			</div>
 		</div>
 	</body>

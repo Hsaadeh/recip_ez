@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from recipe_manager.models import Recipe, Ingredient
+from recipe_manager.models import Recipe, Ingredient, RECIPE_TYPE_CHOICES
 from django.contrib.auth.decorators import login_required
 
 
@@ -64,7 +64,8 @@ def view_add_recipe(request):
 
     context = {
         "page_title": "Add Recipe",
-        "recipes": recipes
+        "recipes": recipes,
+        "recipe_type_choices": RECIPE_TYPE_CHOICES,
     }
 
     return render(request, "add_recipe.html", context)

@@ -1,6 +1,65 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
     <h1>Add recipe</h1>
+    <div class="w-full h-full flex justify-center items-center">
+        <div class="bg-gray-50 w-11/12 h-11/12 lg:w-7/12 lg:h-9/12 rounded-2xl p-4">
+            <form id="add-recipe">
+
+                <label for="name">
+                    <span class="text-sm font-medium text-gray-700"> Name </span>
+                    <input
+                        type="text"
+                        id="name"
+                        class="mt-1 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                    />
+                </label>
+
+                <label for="type">
+                    <span class="text-sm font-medium text-gray-700"> Type </span>
+                    <select
+                        name="type"
+                        id="type"
+                        class="mt-1 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                    >
+                        {% for choice in recipe_type_choices %}
+                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <label for="description">
+                    <span class="text-sm font-medium text-gray-700"> Description </span>
+
+                    <textarea
+                        id="description"
+                        class="mt-1 w-full resize-y rounded border-gray-300 shadow-sm sm:text-sm"
+                        rows="4"
+                    ></textarea>
+                
+                </label>
+
+                <label for="directions">
+                    <span class="text-sm font-medium text-gray-700"> Directions </span>
+
+                    <textarea
+                        id="directions"
+                        class="resize-y mt-1 w-full rounded border-gray-300 shadow-sm sm:text-sm"
+                        rows="4"
+                    ></textarea>
+                
+                </label>
+
+            </form>
+            <button form= type="submit">Save</button>
+        </div>
+    </div>
 {% endblock content %}
 
+
+{% block js %}
+    <script src="{% static "js-helpers/cookie-helper.js" %}"></script>
+    <script src="{% static "add-recipe.js" %}"></script>
+{% endblock js %}
