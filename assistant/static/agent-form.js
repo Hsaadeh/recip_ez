@@ -4,9 +4,6 @@ const messageHistoryContainer = document.querySelector("#message-history-contain
 const form = document.querySelector("#assistant-form")
 const clearTextareaButton = document.querySelector("#clear-textarea-btn")
 const DEFAULT_ERROR_MESSAGE = "An error occured retrieving the response"
-// const SPEECH_SYNTHESIS = window.speechSynthesis
-
-let tts_enabled = true
 
 
 openButtonEl.addEventListener('click', () => modalEl.showModal())
@@ -104,28 +101,15 @@ async function handleSubmitForm(body) {
             break
         }
     }
-    updateMessageHistory(message, "Assistant")
-    // if (tts_enabled) {
-    //     await speak(message)
-    // }
+
+    try {
+        updateMessageHistory(message, "Assistant")
+    } catch {
+        new Notify({
+            status: "error",           
+            title: "Error",
+            text: "Failed render message",
+            autotimeout: 5000,
+        })
+    }
 }   
-
-
-// async function speak(message) {
-//     const voices = speechSynthesis.getVoices()
-//     const target_voice = voices[4] ?? null
-
-//     try {
-//         if (message.length > 0) {
-//             console.log("Starting")
-//             const speechUtterence = new SpeechSynthesisUtterance(message)
-//             if (target_voice != null) {
-//                 speechUtterence.voice = target_voice
-//             }
-//             SPEECH_SYNTHESIS.speak(speechUtterence)
-            
-//         }
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }

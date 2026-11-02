@@ -8,8 +8,9 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
 		{% block css %}{% endblock css %}
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
 	</head>
-
+	
 	<body class="bg-[#D9CFC1]">
 		<div class="flex flex-row w-full">
 			{% comment %} SIDE NAV {% endcomment %}
@@ -94,12 +95,13 @@
 		</div>
 	</body>
 
+	<script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+	<script src="{% static "js-helpers/html-parse.js" %}"></script>
+    <script src="{% static "js-helpers/cookie-helper.js" %}"></script>
+	{% block js %}{% endblock js %}
+	
 	{% if request.user.is_authenticated %}
 		{% include "agent-widget.html" %}
 	{% endif %}
 
-
-	{% block js %}
-	
-	{% endblock js %}
 </html>
