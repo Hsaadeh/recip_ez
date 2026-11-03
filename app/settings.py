@@ -7,13 +7,15 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&3ys%+-o_2au-u8uc1j_t9-nyfh5-htfu#r2%*4a^%k2jp(q7#'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
+if DEBUG == "False":
+    DEBUG = False
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,7 +37,6 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = "profiles.CustomUser"
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,6 +60,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'theme.context_processor.template_context'
             ],
         },
     },
@@ -100,8 +102,18 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = os.getenv("STATIC_URL")
+STATIC_ROOT = os.path.dirname(BASE_DIR) + os.getenv("STATIC_ROOT")
+
+# Media Files
+MEDIA_URL = os.getenv("MEDIA_URL")
+MEDIA_ROOT = os.path.dirname(BASE_DIR) + os.getenv("MEDIA_ROOT")
+MEDIAFILES_DIRS = [
+    os.path.join(os.path.dirname(BASE_DIR), os.getenv("MEDIAFILES_DIRS"))
+]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+WHITENOISE_ROOT = os.path.join(BASE_DIR, os.getenv("WHITENOISE_ROOT"))
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
