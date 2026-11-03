@@ -11,7 +11,9 @@ view_urls = [
     path("add-recipe/", views.view_add_recipe, name="view_add_recipe"),
 ]
 
-api_urls = []
+api_urls = [
+    path("api/add-recipe/", api.api_add_recipe, name="api_add_recipe")
+]
 
 router = DefaultRouter()
 

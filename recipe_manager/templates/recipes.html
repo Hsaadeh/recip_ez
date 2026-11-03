@@ -19,8 +19,8 @@
     
             <a href="/recipe/{{ recipe_item.recipe.id }}" class="block rounded-lg p-4 shadow-lg bg-[#F7F9F9]">
                 <img
-                    alt=""
-                    src="https://media.olivegarden.com/en_us/images/marketing/Shrimp-Alfredo-dpv-1180x730.jpg"
+                    alt="Image of {{ recipe_item.recipe.name }}"
+                    src="{{ media_url }}{{ recipe_item.recipe.image }}"
                     class="h-56 w-full rounded-md object-cover"
                 />
     

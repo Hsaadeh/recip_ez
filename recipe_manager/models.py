@@ -1,3 +1,5 @@
+import os
+import uuid
 from django.db import models
 from djmoney.models.fields import MoneyField
 from profiles.models import CustomUser
@@ -12,6 +14,11 @@ RECIPE_TYPE_CHOICES = (
 
 
 class Recipe(models.Model):
+    def upload_recipe_image(instance, filename):
+        extension = filename.split(".")[-1]
+        filename = "%s.%s" % (uuid.uuid4(), extension)
+        return os.path.join("recipes", filename)
+
     id = models.AutoField(
         primary_key=True,
     )
@@ -34,6 +41,11 @@ class Recipe(models.Model):
     )
     recipe_type = models.CharField(
         choices=RECIPE_TYPE_CHOICES,
+        blank=True,
+        null=True,
+    )
+    image = models.ImageField(
+        upload_to=upload_recipe_image,
         blank=True,
         null=True,
     )

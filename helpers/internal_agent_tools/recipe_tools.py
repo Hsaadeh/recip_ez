@@ -5,7 +5,7 @@ from app.settings import HTTP_PROTOCOL, SITE_URL
 
 
 @tool
-def get_recipes():
+def get_recipes() -> dict:
     """Gets all available recipes
     - Use the 'link' as an html element
     """
