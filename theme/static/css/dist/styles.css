@@ -385,6 +385,9 @@
   .w-56 {
     width: calc(var(--spacing) * 56);
   }
+  .w-\[300px\] {
+    width: 300px;
+  }
   .w-fit {
     width: fit-content;
   }
@@ -568,8 +571,8 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .object-cover {
-    object-fit: cover;
+  .object-contain {
+    object-fit: contain;
   }
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);

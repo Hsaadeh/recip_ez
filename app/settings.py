@@ -31,7 +31,8 @@ INSTALLED_APPS = [
     'recipe_manager',
     'assistant',
     'tailwind',
-    'theme'
+    'theme',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 AUTH_USER_MODEL = "profiles.CustomUser"
@@ -103,7 +104,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = os.getenv("STATIC_URL")
-STATIC_ROOT = os.path.dirname(BASE_DIR) + os.getenv("STATIC_ROOT")
+# STATIC_ROOT = os.path.dirname(BASE_DIR) + os.getenv("STATIC_ROOT")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media Files
 MEDIA_URL = os.getenv("MEDIA_URL")
