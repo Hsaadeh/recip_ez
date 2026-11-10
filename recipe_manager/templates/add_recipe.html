@@ -1,14 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <h1>Add recipe</h1>
     <div class="w-full h-full flex justify-center items-center">
         <div class="bg-gray-100 w-11/12 h-11/12 lg:w-7/12 lg:h-10/12 rounded-2xl p-4 flex flex-col justify-between">
-            <form id="form-add-recipe" class="flex flex-col justify-between h-11/12 w-full">
+            <form id="form-add-recipe" class="flex flex-col justify-between h-11/12 w-full gap-y-4 mb-4">
 
                 <label for="name">
                     <span class="text-lg font-medium text-gray-700"> Name </span>
                     <input
+                        required
                         type="text"
                         id="name"
                         class="w-full p-2 rounded bg-white border-gray-300 shadow-sm text-lg"
@@ -32,6 +33,7 @@
                     <span class="text-lg font-medium text-gray-700"> Description </span>
 
                     <textarea
+                        required
                         id="description"
                         class="h-10/12 p-2 w-full resize-y rounded bg-white border-gray-300 shadow-sm sm:text-sm"
                     ></textarea>
@@ -42,6 +44,7 @@
                     <span class="text-lg font-medium text-gray-700"> Directions </span>
 
                     <textarea
+                        required
                         id="directions"
                         class="h-10/12 p-2 resize-y w-full rounded bg-white border-gray-300 shadow-sm sm:text-sm"
                     ></textarea>
@@ -51,6 +54,7 @@
                 <label for="recipe_image">
                     <span class="text-lg font-medium text-gray-700"> Image </span>
                     <input
+                        required
                         type="file"
                         name="recipe_image"
                         id="recipe_image"

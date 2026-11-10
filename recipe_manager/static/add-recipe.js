@@ -27,6 +27,33 @@ async function makeAddRecipeRequest() {
         },
         body: formData,
     }
-    const response = await fetch(url, options)
-    console.log(response)
-}   
+
+    try {
+        const response = await fetch(url, options)
+        if (!response.ok) {
+            notifyError("Bad request")
+        }
+
+        const result = await response.json()
+        const newRecipeId = result["new_recipe_id"] ?? null
+
+        if (newRecipeId != null) {
+            window.location.href = `/recipe/${newRecipeId}`
+        } else {
+            notifyError("Error unable to redirect")
+        }
+
+    } catch {
+        notifyError("Unkown error occured")
+    }
+}
+
+
+function notifyError(message) {
+    new Notify({
+        status: "error",
+        title: "Error",
+        text: message,
+        autotimeout: 5000,
+    })
+}

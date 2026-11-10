@@ -4,11 +4,19 @@ from recipe_manager import models
 
 class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = '__all__'
         model = models.Recipe
+        fields = [
+            "id",
+            "owner",
+            "name",
+            "description",
+            "directions",
+            "recipe_type",
+            "image",
+        ]
 
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = '__all__'
         model = models.Ingredient
+        fields = '__all__'

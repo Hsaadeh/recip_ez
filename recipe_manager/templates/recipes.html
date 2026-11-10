@@ -8,22 +8,26 @@
 
 {% block content %}
 
-    <a href="/add-recipe">Add Recipe</a>
-
-    <h1>
-        Recipes
-    </h1>
+    <div class="w-full flex flex-row justify-end p-4">
+        <a 
+            href="/add-recipe"
+            class="inline-flex cursor-pointer items-center justify-center rounded-full border border-[#43281C] bg-[#43281C] px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-[#331e15] focus-visible:ring-4 focus-visible:ring-indigo-200 focus-visible:outline-none"
+        >
+            Add Recipe
+        </a>
+    </div>
 
     <div class="flex flex-wrap gap-4 p-8">
         {% for recipe_item in recipe_data %}
     
-            <a href="/recipe/{{ recipe_item.recipe.id }}" class="block rounded-lg p-4 shadow-lg bg-[#F7F9F9]">
+            <a href="/recipe/{{ recipe_item.recipe.id }}" class="w-[300px] block rounded-lg p-4 shadow-lg bg-[#F7F9F9]">
                 <img
                     alt="Image of {{ recipe_item.recipe.name }}"
                     src="{{ media_url }}{{ recipe_item.recipe.image }}"
-                    class="h-56 w-full rounded-md object-cover"
+                    class="h-56 w-full rounded-lg object-contain"
+                    {% comment %} onerror='this.onerror=null; this.src={% static "images/food_placeholder.png" %} %}' {% endcomment %}
                 />
-    
+
                 <div class="mt-2">
                     <dl>
                     <div>

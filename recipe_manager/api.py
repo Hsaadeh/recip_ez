@@ -3,18 +3,18 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from recipe_manager import models
+from recipe_manager.models import Recipe, Ingredient
 from .serializers import RecipeSerializer, IngredientSerializer
 
 
 # @permission_classes([IsAuthenticated])
 class RecipeViewSet(viewsets.ModelViewSet):
-    queryset = models.Recipe.objects.all()
+    queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
 
 
 class IngredientViewSet(viewsets.ModelViewSet):
-    queryset = models.Ingredient.objects.all()
+    queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
 
 
@@ -26,8 +26,9 @@ def api_add_recipe(request):
     updated_data = request_data.copy()
     updated_data["owner"] = request.user.id
     recipe = RecipeSerializer(data=updated_data)
+    
     if recipe.is_valid():
-        recipe.save()
+        new_recipe = recipe.save()
     else:
         data = {
             "message": "Bad request, invalid data",
@@ -37,5 +38,6 @@ def api_add_recipe(request):
 
     data = {
         "message": "Recipe added",
+        "new_recipe_id": new_recipe.id
     }
     return Response(data=data, status=status.HTTP_200_OK)
