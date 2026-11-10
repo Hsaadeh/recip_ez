@@ -12,6 +12,12 @@
         {{ recipe.name }}
     </h1>
 
+    <div class="flex flex-col gap-y-4">
+        <p>{{ recipe.description }}</p>
+        <p>{{ recipe.directions }}</p>
+        <p>{{ recipe.recipe_type }}</p>
+    </div>
+
     {% for ingredient in ingredients %}
         <p>{{ ingredient.name }}</p>
     {% endfor %}
