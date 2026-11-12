@@ -41,8 +41,7 @@ class Recipe(models.Model):
     )
     recipe_type = models.CharField(
         choices=RECIPE_TYPE_CHOICES,
-        blank=True,
-        null=True,
+        default="Snack",
         max_length=10,
     )
     image = models.ImageField(
