@@ -43,6 +43,7 @@ class Recipe(models.Model):
         choices=RECIPE_TYPE_CHOICES,
         blank=True,
         null=True,
+        max_length=10,
     )
     image = models.ImageField(
         upload_to=upload_recipe_image,
