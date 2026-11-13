@@ -1,5 +1,3 @@
-
-
 document.querySelector("#form-add-recipe").addEventListener("submit", function (event) {
     event.preventDefault()
     makeAddRecipeRequest()
