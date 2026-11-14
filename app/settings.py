@@ -128,8 +128,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = os.getenv("STATIC_URL")
-# STATIC_ROOT = os.path.dirname(BASE_DIR) + os.getenv("STATIC_ROOT")
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.dirname(BASE_DIR) + os.getenv("STATIC_ROOT")
 
 # Media Files
 MEDIA_URL = os.getenv("MEDIA_URL")

@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.settings import DEFAULT_VIEW
@@ -36,3 +37,9 @@ def view_not_found(request):
 @login_required(login_url="/sign-in")
 def view_redirect(request):
     return redirect(DEFAULT_VIEW)
+
+
+@login_required(login_url="/sign-in")
+def view_logout(request):
+    logout(request)
+    return redirect("view_sign_in")
