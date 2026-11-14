@@ -19,8 +19,8 @@
 				<div class="bg-[#43281C] flex h-screen w-16 flex-col justify-between border-e border-gray-100">
 					<div>
 						<div class="inline-flex size-16 items-center justify-center">
-							<span class="grid size-10 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
-								{{ request.user.first_name.0 }} {{ request.user.last_name.0 }}
+							<span class="grid size-10 place-content-center rounded-lg bg-gray-100 font-bold text-gray-600">
+								{{ request.user.email.0|upper }}
 							</span>
 						</div>
 		
@@ -80,7 +80,7 @@
 						<span
 							class="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded-sm bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible"
 						>
-							Logout
+							Logout {{ request.user.email }}
 						</span>
 						</a>
 					</div>
@@ -101,7 +101,7 @@
     <script src="{% static "js-helpers/cookie-helper.js" %}"></script>
 	{% block js %}{% endblock js %}
 	
-	{% if request.user.is_authenticated %}
+	{% if request.user.is_superuser %}
 		{% include "agent-widget.html" %}
 	{% endif %}
 

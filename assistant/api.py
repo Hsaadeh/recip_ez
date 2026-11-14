@@ -7,7 +7,7 @@ from django.http.response import StreamingHttpResponse, JsonResponse
 async def api_agent_prompt(request):
     """Endpoint to prompt the agent"""
     user = await request.auser()
-    if user.is_authenticated != True:
+    if user.is_superuser != True:
         data = {
             "message": "Unauthorized"
         }
